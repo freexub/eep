@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1ee5a07e97ad6ad3ce89fc5b0498736d",
+    "content-hash": "b51f475537bc40c5e80673a5369c5bbb",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -2150,6 +2150,60 @@
                 "source": "https://github.com/guzzle/psr7/tree/1.8.2"
             },
             "time": "2021-04-26T09:17:50+00:00"
+        },
+        {
+            "name": "insolita/yii2-migration-generator",
+            "version": "3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Insolita/yii2-migrik.git",
+                "reference": "f7584aba1d0d0879f566189812c988b4fc7f2cb8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Insolita/yii2-migrik/zipball/f7584aba1d0d0879f566189812c988b4fc7f2cb8",
+                "reference": "f7584aba1d0d0879f566189812c988b4fc7f2cb8",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": ">=2.0.14"
+            },
+            "require-dev": {
+                "yiisoft/yii2-gii": "*"
+            },
+            "suggest": {
+                "nesbot/carbon": "for testing ",
+                "vlucas/phpdotenv": "for testing"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "bootstrap": "insolita\\migrik\\Bootstrap"
+            },
+            "autoload": {
+                "psr-4": {
+                    "insolita\\migrik\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "insolita",
+                    "email": "donnainsolita@gmail.com"
+                }
+            ],
+            "description": "Set of gii tools for generating  files for migration by schema of table , phpdoc or table data",
+            "keywords": [
+                "extension",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://github.com/Insolita/yii2-migrik/issues",
+                "source": "https://github.com/Insolita/yii2-migrik/tree/3.2"
+            },
+            "time": "2019-07-26T10:58:40+00:00"
         },
         {
             "name": "myclabs/deep-copy",
