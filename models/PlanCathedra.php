@@ -10,6 +10,7 @@ use Yii;
  * @property int $id
  * @property string $name
  * @property int $short_name
+ * @property int $language
  *
  * @property Plan[] $plans
  */
@@ -29,8 +30,8 @@ class PlanCathedra extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'short_name'], 'required'],
-            [['short_name'], 'integer'],
+            [['name', 'short_name', 'language'], 'required'],
+            [['short_name', 'language'], 'integer'],
             [['name'], 'string', 'max' => 150],
         ];
     }
@@ -44,6 +45,7 @@ class PlanCathedra extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Name',
             'short_name' => 'Short Name',
+            'language' => 'Language',
         ];
     }
 

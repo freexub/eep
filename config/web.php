@@ -73,10 +73,10 @@ $config = [
         ],
     ],
     'modules' => [
-        'gridview' => ['class' => 'kartik\grid\Module'],
-        'admin' => [
-            'class' => 'app\modules\admin\Module',
-        ],
+//        'gridview' => ['class' => 'kartik\grid\Module'],
+//        'admin' => [
+//            'class' => 'app\modules\admin\Module',
+//        ],
         'rbac' => [
             'class' => 'mdm\admin\Module',
             'controllerMap' => [
@@ -88,15 +88,13 @@ $config = [
                 ],
             ],
             'layout' => 'left-menu',
-            'mainLayout' => '@app/views/layouts/admin.php',
+            'mainLayout' => '@app/views/layouts/main.php',
         ]
     ],
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
             'site/*',
-            'rbac/*',
-            'gii/*',
         ]
     ],
     'params' => $params,
