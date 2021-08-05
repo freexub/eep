@@ -9,10 +9,14 @@ use Yii;
  *
  * @property int $id
  * @property string $name
- * @property int $short_name
- * @property int $language
+ * @property string $name_kz
+ * @property string $name_en
+ * @property string $short_name
+ * @property string $short_name_kz
+ * @property string $short_name_en
  *
  * @property Plan[] $plans
+ * @property PlanReviewer[] $planReviewers
  */
 class PlanCathedra extends \yii\db\ActiveRecord
 {
@@ -30,7 +34,7 @@ class PlanCathedra extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'short_name', 'language'], 'required'],
+            [['name', 'name_kz', 'name_en', 'short_name', 'short_name_kz', 'short_name_en'], 'required'],
             [['name', 'name_kz', 'name_en'], 'string', 'max' => 64],
             [['short_name', 'short_name_kz', 'short_name_en'], 'string', 'max' => 8],
         ];
@@ -43,8 +47,12 @@ class PlanCathedra extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Кафедра',
+            'name' => 'Name',
+            'name_kz' => 'Name Kz',
+            'name_en' => 'Name En',
             'short_name' => 'Short Name',
+            'short_name_kz' => 'Short Name Kz',
+            'short_name_en' => 'Short Name En',
         ];
     }
 
@@ -56,5 +64,15 @@ class PlanCathedra extends \yii\db\ActiveRecord
     public function getPlans()
     {
         return $this->hasMany(Plan::className(), ['cathedra_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[PlanReviewers]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPlanReviewers()
+    {
+        return $this->hasMany(PlanReviewer::className(), ['cathedra_id' => 'id']);
     }
 }

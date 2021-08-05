@@ -40,7 +40,7 @@ class PlanStatus extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Статус',
+            'name' => 'Name',
         ];
     }
 

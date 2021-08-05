@@ -9,8 +9,9 @@ use Yii;
  *
  * @property int $id
  * @property string $name Специальность
+ * @property string $name_kz
+ * @property string $name_en
  * @property string $code Шифр
- * @property int $language
  */
 class PlanSpeciality extends \yii\db\ActiveRecord
 {
@@ -29,9 +30,7 @@ class PlanSpeciality extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'name_kz', 'name_en', 'code'], 'required'],
-            [['name'], 'string', 'max' => 64],
-            [['name_kz'], 'string', 'max' => 64],
-            [['name_en'], 'string', 'max' => 64],
+            [['name', 'name_kz', 'name_en'], 'string', 'max' => 64],
             [['code'], 'string', 'max' => 10],
         ];
     }
@@ -43,8 +42,10 @@ class PlanSpeciality extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Специальность',
-            'code' => 'Шифр',
+            'name' => 'Name',
+            'name_kz' => 'Name Kz',
+            'name_en' => 'Name En',
+            'code' => 'Code',
         ];
     }
 }

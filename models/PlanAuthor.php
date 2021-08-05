@@ -5,22 +5,22 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "plan_autor".
+ * This is the model class for table "plan_author".
  *
  * @property int $id
  * @property int $plan_id План
- * @property int $autor_id Автор
+ * @property int $author_id Автор
  *
  * @property Plan $plan
  */
-class PlanAutor extends \yii\db\ActiveRecord
+class PlanAuthor extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'plan_autor';
+        return 'plan_author';
     }
 
     /**
@@ -29,8 +29,8 @@ class PlanAutor extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['plan_id', 'autor_id'], 'required'],
-            [['plan_id', 'autor_id'], 'integer'],
+            [['plan_id', 'author_id'], 'required'],
+            [['plan_id', 'author_id'], 'integer'],
             [['plan_id'], 'exist', 'skipOnError' => true, 'targetClass' => Plan::className(), 'targetAttribute' => ['plan_id' => 'id']],
         ];
     }
@@ -42,8 +42,8 @@ class PlanAutor extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'plan_id' => 'План',
-            'autor_id' => 'Автор',
+            'plan_id' => 'Plan ID',
+            'author_id' => 'Author ID',
         ];
     }
 

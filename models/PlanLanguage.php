@@ -10,6 +10,8 @@ use Yii;
  * @property int $id
  * @property string $name
  * @property string $short_name
+ *
+ * @property Plan[] $plans
  */
 class PlanLanguage extends \yii\db\ActiveRecord
 {
@@ -40,8 +42,18 @@ class PlanLanguage extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Язык',
-            'short_name' => 'Код',
+            'name' => 'Name',
+            'short_name' => 'Short Name',
         ];
+    }
+
+    /**
+     * Gets query for [[Plans]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPlans()
+    {
+        return $this->hasMany(Plan::className(), ['language' => 'id']);
     }
 }
