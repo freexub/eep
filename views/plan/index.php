@@ -1,6 +1,5 @@
 <?php
 
-use app\models\PlanType;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
@@ -31,9 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'discipline',
 
+            // Тип ЭУИ
             [
-                'attribute'=>'type_id',
-                'filter'=>Html::activeDropDownList($searchModel, 'type_id', ArrayHelper::map(PlanType::find()->all(), 'id', 'name'), ['class'=>'form-control','prompt' => ' ']),
+                'attribute'=>'type.name',
+                'filter'=>Html::activeDropDownList($searchModel, 'type_id', ArrayHelper::map($type_query, 'id', 'name'), ['class'=>'form-control','prompt' => ' ']),
             ],
 
             [
@@ -41,9 +41,24 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => false
             ],
 
-            'cathedra.short_name',
-            'status.name',
-            'languages.short_name',
+            // Сокращённое название кафедры
+            [
+                'attribute'=>'cathedra.short_name',
+                'filter'=>Html::activeDropDownList($searchModel, 'cathedra_id', ArrayHelper::map($cathedra_short_name_query, 'id', 'short_name'), ['class'=>'form-control','prompt' => ' ']),
+            ],
+
+            // Статус плана
+            [
+                'attribute'=>'status.name',
+                'filter'=>Html::activeDropDownList($searchModel, 'status_id', ArrayHelper::map($status_query, 'id', 'name'), ['class'=>'form-control','prompt' => ' ']),
+            ],
+
+            // Сокращённое название языка
+            [
+                'attribute'=>'languages.short_name',
+                'filter'=>Html::activeDropDownList($searchModel, 'language', ArrayHelper::map($language_query, 'id', 'short_name'), ['class'=>'form-control','prompt' => ' ']),
+            ],
+
             //'note:ntext',
 
             ['class' => 'yii\grid\ActionColumn'],

@@ -4,10 +4,14 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Plan;
+use app\models\PlanCathedra;
+use app\models\PlanLanguage;
 use app\models\PlanSearch;
+use app\models\PlanStatus;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\PlanType;
 
 /**
  * PlanController implements the CRUD actions for Plan model.
@@ -37,10 +41,18 @@ class PlanController extends Controller
     {
         $searchModel = new PlanSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $type_query = PlanType::find()->all();
+        $cathedra_short_name_query = PlanCathedra::find()->all();
+        $status_query = PlanStatus::find()->all();
+        $language_query = PlanLanguage::find()->all();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'type_query' => $type_query,
+            'cathedra_short_name_query' => $cathedra_short_name_query,
+            'status_query' => $status_query,
+            'language_query' => $language_query,
         ]);
     }
 
