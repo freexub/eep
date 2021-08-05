@@ -29,9 +29,8 @@ class PlanType extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'language'], 'required'],
-            [['language'], 'integer'],
-            [['name'], 'string', 'max' => 100],
+            [['name'], 'required'],
+            [['name'], 'string', 'max' => 32],
         ];
     }
 
@@ -43,7 +42,6 @@ class PlanType extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Тип ЭУИ',
-            'language' => 'Язык',
         ];
     }
 

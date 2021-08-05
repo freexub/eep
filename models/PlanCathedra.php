@@ -31,8 +31,8 @@ class PlanCathedra extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'short_name', 'language'], 'required'],
-            [['short_name', 'language'], 'integer'],
-            [['name'], 'string', 'max' => 150],
+            [['name', 'name_kz', 'name_en'], 'string', 'max' => 64],
+            [['short_name', 'short_name_kz', 'short_name_en'], 'string', 'max' => 8],
         ];
     }
 
@@ -43,9 +43,8 @@ class PlanCathedra extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Кафедра',
             'short_name' => 'Short Name',
-            'language' => 'Language',
         ];
     }
 

@@ -28,8 +28,8 @@ class PlanLanguage extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'short_name'], 'required'],
-            [['name'], 'string', 'max' => 50],
-            [['short_name'], 'string', 'max' => 10],
+            [['name'], 'string', 'max' => 32],
+            [['short_name'], 'string', 'max' => 2],
         ];
     }
 
@@ -40,8 +40,8 @@ class PlanLanguage extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'short_name' => 'Short Name',
+            'name' => 'Язык',
+            'short_name' => 'Код',
         ];
     }
 }

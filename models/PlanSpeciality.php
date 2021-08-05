@@ -28,9 +28,10 @@ class PlanSpeciality extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'code', 'language'], 'required'],
-            [['language'], 'integer'],
-            [['name'], 'string', 'max' => 250],
+            [['name', 'name_kz', 'name_en', 'code'], 'required'],
+            [['name'], 'string', 'max' => 64],
+            [['name_kz'], 'string', 'max' => 64],
+            [['name_en'], 'string', 'max' => 64],
             [['code'], 'string', 'max' => 10],
         ];
     }
@@ -44,7 +45,6 @@ class PlanSpeciality extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Специальность',
             'code' => 'Шифр',
-            'language' => 'Language',
         ];
     }
 }
