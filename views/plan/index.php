@@ -1,7 +1,9 @@
 <?php
 
+use app\models\PlanType;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\PlanSearch */
@@ -28,7 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'name',
             'discipline',
-            'type.name',
+
+            [
+                'attribute'=>'type_id',
+                'filter'=>Html::activeDropDownList($searchModel, 'type_id', ArrayHelper::map(PlanType::find()->all(), 'id', 'name'), ['class'=>'form-control','prompt' => ' ']),
+            ],
+
             [
                 'attribute' => 'deadline', 'format' => ['date', 'php:d.m.Y'],
                 'filter' => false
