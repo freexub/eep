@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\PlanSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Plans';
+$this->title = 'План ЭУИ';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="plan-index">
@@ -26,15 +26,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            'name',
             'discipline',
-            'type_id',
-            'url:ntext',
-            'deadline',
-            //'name',
-            //'language',
-            //'cathedra_id',
-            //'status_id',
+            'type.name',
+            [
+                'attribute' => 'deadline', 'format' => ['date', 'php:d.m.Y'],
+                'filter' => false
+            ],
+
+            'cathedra.short_name',
+            'status.name',
+            'languages.short_name',
             //'note:ntext',
 
             ['class' => 'yii\grid\ActionColumn'],

@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property string $name Тип ЭУИ
+ * @property int $language
  *
  * @property Plan[] $plans
  */
@@ -28,7 +29,8 @@ class PlanType extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            [['name', 'language'], 'required'],
+            [['language'], 'integer'],
             [['name'], 'string', 'max' => 100],
         ];
     }
@@ -41,6 +43,7 @@ class PlanType extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Тип ЭУИ',
+            'language' => 'Language',
         ];
     }
 
