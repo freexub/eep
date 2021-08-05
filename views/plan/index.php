@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\PlanSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'План ЭУИ';
+$this->title = 'Планы ЭУИ';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="plan-index">
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Plan', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать план', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -30,13 +30,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'discipline',
             'type.name',
             [
-                'attribute' => 'deadline', 'format' => ['date', 'php:d.m.Y'],
+                'attribute' => 'deadline',
+                'format' => ['date', 'php:d.m.Y'],
                 'filter' => false
             ],
-
-            'cathedra.short_name',
+            [
+                'label' => 'Кафедра',
+                'attribute' => 'cathedra.short_name',
+            ],
             'status.name',
-            'languages.short_name',
+            [
+                'label' => 'Язык',
+                'attribute' => 'languages.short_name',
+            ],
             //'note:ntext',
 
             ['class' => 'yii\grid\ActionColumn'],
