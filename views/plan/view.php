@@ -29,18 +29,25 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            [
+                'attribute' => 'name',
+                'label' => 'Название ЭУИ',
+            ],
+            [
+                'attribute' => 'cathedra.name',
+                'label' => 'Кафедра',
+            ],
             'discipline',
             'type.name',
             'url:ntext',
             'deadline',
-            'name',
-            'languages.name',
-            'cathedra.name',
+            [
+                'attribute' => 'languages.name',
+                'label' => 'Язык',
+            ],
             'status.name',
             'note:ntext',
         ],
     ]) ?>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/iywaBOMvYLI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
