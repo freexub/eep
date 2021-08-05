@@ -64,6 +64,7 @@ class PlanSearch extends Plan
             'cathedra_id' => $this->cathedra_id,
             'status_id' => $this->status_id,
             'language' => $this->language,
+            'DATE(deadline)' => $this->deadline,
         ]);
 
         $query->andFilterWhere(['like', 'discipline', $this->discipline])

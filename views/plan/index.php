@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
+use yii\jui\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\PlanSearch */
@@ -36,9 +37,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter'=>Html::activeDropDownList($searchModel, 'type_id', ArrayHelper::map($type_query, 'id', 'name'), ['class'=>'form-control','prompt' => ' ']),
             ],
 
+            // Дата
             [
-                'attribute' => 'deadline', 'format' => ['date', 'php:d.m.Y'],
-                'filter' => false
+                'attribute' => 'deadline', 
+                'value' => 'deadline',
+                'format' => ['date', 'php:d.m.Y'],
+                'filter' => DatePicker::widget([
+                    'model'=>$searchModel,
+                    'attribute'=>'deadline',
+                    'language' => 'ru',
+                    'dateFormat' => 'php:Y-m-d',
+                    'options' => ['class' => 'form-control'],
+                ]),
             ],
 
             // Сокращённое название кафедры
