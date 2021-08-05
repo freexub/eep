@@ -42,7 +42,7 @@ class PlanSpeciality extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Специальность',
             'name_kz' => 'Name Kz',
             'name_en' => 'Name En',
             'code' => 'Code',

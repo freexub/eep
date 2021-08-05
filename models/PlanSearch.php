@@ -38,9 +38,13 @@ class PlanSearch extends Plan
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $cathedra = NULL)
     {
         $query = Plan::find();
+
+        if ($cathedra) {
+            $query->where(['cathedra_id' => $cathedra]);
+        }
 
         // add conditions that should always apply here
 

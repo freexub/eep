@@ -42,8 +42,8 @@ class PlanLanguage extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'short_name' => 'Short Name',
+            'name' => 'Язык',
+            'short_name' => 'Код',
         ];
     }
 

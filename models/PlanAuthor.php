@@ -42,8 +42,8 @@ class PlanAuthor extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'plan_id' => 'Plan ID',
-            'author_id' => 'Author ID',
+            'plan_id' => 'План',
+            'author_id' => 'Автор',
         ];
     }
 

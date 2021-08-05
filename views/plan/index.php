@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'status.name',
             [
                 'label' => 'Язык',
-                'attribute' => 'languages.short_name',
+                'attribute' => 'languages.name',
             ],
             //'note:ntext',
 

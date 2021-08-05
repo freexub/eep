@@ -44,7 +44,7 @@ class PlanReviewer extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'cathedra_id' => 'Cathedra ID',
+            'cathedra_id' => 'Кафедра',
             'user_id' => 'User ID',
         ];
     }

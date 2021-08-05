@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Plan;
 use app\models\PlanSearch;
+use app\models\PlanReviewer;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -35,9 +36,17 @@ class PlanController extends Controller
      */
     public function actionIndex()
     {
+        $userId = Yii::$app->user->getId();
+        $role = Yii::$app->authManager->getRolesByUser($userId);
         $searchModel = new PlanSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        if ($role['admin']) {
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        } else {
+            $cathedra = PlanReviewer::findOne(['user_id' => $userId])['cathedra_id'];
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $cathedra);
+        }
+        
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

@@ -40,7 +40,7 @@ class PlanType extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Тип',
         ];
     }
 

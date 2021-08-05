@@ -47,9 +47,9 @@ class PlanCathedra extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'name_kz' => 'Name Kz',
-            'name_en' => 'Name En',
+            'name' => 'Кафедра',
+            'name_kz' => 'Кафедра',
+            'name_en' => 'Department',
             'short_name' => 'Short Name',
             'short_name_kz' => 'Short Name Kz',
             'short_name_en' => 'Short Name En',
