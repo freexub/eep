@@ -13,7 +13,7 @@ use Yii;
  * @property string $url Ссылка
  * @property string $deadline Срок сдачи
  * @property string $name Название ЭУИ
- * @property string $language Язык разработки
+ * @property int $language Язык разработки
  * @property int $cathedra_id Кафедра
  * @property int $status_id Статус
  * @property string $note Замечание
@@ -38,15 +38,15 @@ class Plan extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['discipline', 'type_id', 'url', 'deadline', 'name', 'language', 'cathedra_id', 'status_id', 'note'], 'required'],
-            [['type_id', 'cathedra_id', 'status_id'], 'integer'],
+            [['discipline', 'type_id', 'deadline', 'name', 'language', 'cathedra_id'], 'required'],
+            [['type_id', 'cathedra_id', 'status_id', 'language'], 'integer'],
             [['url', 'note'], 'string'],
-            [['deadline'], 'safe'],
+//            [['deadline'], 'safe'],
             [['discipline', 'name'], 'string', 'max' => 250],
-            [['language'], 'string', 'max' => 10],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => PlanStatus::className(), 'targetAttribute' => ['status_id' => 'id']],
             [['type_id'], 'exist', 'skipOnError' => true, 'targetClass' => PlanType::className(), 'targetAttribute' => ['type_id' => 'id']],
             [['cathedra_id'], 'exist', 'skipOnError' => true, 'targetClass' => PlanCathedra::className(), 'targetAttribute' => ['cathedra_id' => 'id']],
+            [['language'], 'exist', 'skipOnError' => true, 'targetClass' => PlanLanguage::className(), 'targetAttribute' => ['language' => 'id']],
         ];
     }
 
@@ -79,6 +79,11 @@ class Plan extends \yii\db\ActiveRecord
         return $this->hasOne(PlanStatus::className(), ['id' => 'status_id']);
     }
 
+    public function getAllStatus()
+    {
+        return PlanStatus::find()->all();
+    }
+
     /**
      * Gets query for [[Type]].
      *
@@ -89,6 +94,11 @@ class Plan extends \yii\db\ActiveRecord
         return $this->hasOne(PlanType::className(), ['id' => 'type_id']);
     }
 
+    public function getAllType()
+    {
+        return PlanType::find()->all();
+    }
+
     /**
      * Gets query for [[Cathedra]].
      *
@@ -97,5 +107,25 @@ class Plan extends \yii\db\ActiveRecord
     public function getCathedra()
     {
         return $this->hasOne(PlanCathedra::className(), ['id' => 'cathedra_id']);
+    }
+
+    public function getAllCathedras()
+    {
+        return PlanCathedra::find()->orderBy('short_name ASC')->all();
+    }
+
+    /**
+     * Gets query for [[Language]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLanguages()
+    {
+        return $this->hasOne(PlanLanguage::className(), ['id' => 'language']);
+    }
+
+    public function getAllLanguage()
+    {
+        return PlanLanguage::find()->all();
     }
 }

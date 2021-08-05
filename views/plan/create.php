@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Plan */
 
-$this->title = 'Create Plan';
-$this->params['breadcrumbs'][] = ['label' => 'Plans', 'url' => ['index']];
+$this->title = 'Добавление';
+$this->params['breadcrumbs'][] = ['label' => 'План ЭУИ', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="plan-create">

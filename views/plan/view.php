@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Plan */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Plans', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'План ЭУИ', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -31,13 +31,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'discipline',
-            'type_id',
+            'type.name',
             'url:ntext',
             'deadline',
             'name',
-            'language',
-            'cathedra_id',
-            'status_id',
+            'languages.name',
+            'cathedra.name',
+            'status.name',
             'note:ntext',
         ],
     ]) ?>
