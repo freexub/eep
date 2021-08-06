@@ -8,6 +8,7 @@ use app\models\PlanSearch;
 use app\models\PlanReviewer;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 /**
@@ -37,10 +38,9 @@ class PlanController extends Controller
     public function actionIndex()
     {
         $userId = Yii::$app->user->getId();
-        $role = Yii::$app->authManager->getRolesByUser($userId);
         $searchModel = new PlanSearch();
 
-        if ($role['admin']) {
+        if (Yii::$app->authManager->getRolesByUser($userId)['admin']) {
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         } else {
             $cathedra = PlanReviewer::findOne(['user_id' => $userId])['cathedra_id'];
@@ -113,9 +113,39 @@ class PlanController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        if (Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['admin']) {  
+            $this->findModel($id)->delete();
+            return $this->redirect(['index']);
+        } else {
+            throw new ForbiddenHttpException("Недостаточно прав.");
+        }
+    }
 
-        return $this->redirect(['index']);
+    public function actionCertificate($id)
+    {
+        if ($this->findModel($id)['status_id'] == 3) {
+            return $this->render('certificate', [
+                'id' => $id,
+                'model' => $this->findModel($id),
+            ]);
+        } else {
+            throw new ForbiddenHttpException("ЭУИ ещё не проверено.");
+        }
+    }
+
+    protected function generateCertificate(
+        $lang,
+        $type,
+        $number,
+        $name,
+        $teacherName,
+        $department,
+        $discipline,
+        $speciality,
+        array $values
+    )
+    {
+
     }
 
     /**

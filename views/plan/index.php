@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\grid\ActionColumn;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\PlanSearch */
@@ -24,8 +25,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
             'name',
             'discipline',
             'type.name',
@@ -45,7 +44,17 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             //'note:ntext',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} {certificate}',
+                'buttons'=>[
+                    'certificate' => function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-download-alt"></span>', $url, [
+                            'title' => 'Загрузить сертификат',
+                        ]);
+                    }
+                ],
+            ],
         ],
     ]); ?>
 
