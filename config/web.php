@@ -10,8 +10,8 @@ $config = [
     'language' => 'ru',
     'sourceLanguage' => 'ru',
     'aliases' => [
-        '@bower'        => '@vendor/bower-asset',
-        '@npm'          => '@vendor/npm-asset',
+        '@bower'    => '@vendor/bower-asset',
+        '@npm'      => '@vendor/npm-asset',
     ],
     'components' => [
         'formatter' => [

@@ -4,39 +4,44 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "853474f05df5e957151bea613252cee1",
+    "content-hash": "b570ed5332b4e2abe8385a633b664d03",
     "packages": [
         {
             "name": "2amigos/qrcode-library",
-            "version": "1.1.2",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/2amigos/qrcode-library.git",
-                "reference": "5356f2355c7ba9a9ced67753411c88c2c095deb0"
+                "reference": "3504028c5c1f62f5615bbd7b7f12698585836b4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/2amigos/qrcode-library/zipball/5356f2355c7ba9a9ced67753411c88c2c095deb0",
-                "reference": "5356f2355c7ba9a9ced67753411c88c2c095deb0",
+                "url": "https://api.github.com/repos/2amigos/qrcode-library/zipball/3504028c5c1f62f5615bbd7b7f12698585836b4c",
+                "reference": "3504028c5c1f62f5615bbd7b7f12698585836b4c",
                 "shasum": ""
             },
             "require": {
                 "bacon/bacon-qr-code": "^1.0",
                 "ext-gd": "*",
+                "ext-simplexml": "*",
                 "khanamiryan/qrcode-detector-decoder": "^1.0",
-                "php": ">=5.6"
+                "php": ">=7.3"
             },
             "require-dev": {
                 "codeception/codeception": "*",
+                "codeception/module-asserts": "^1.1",
+                "codeception/module-filesystem": "^1.0",
+                "codeception/module-yii2": "^1.0",
                 "codeception/specify": "^0.4.3",
                 "codeception/verify": "^0.3.1",
                 "friendsofphp/php-cs-fixer": "^2.3",
                 "phpmd/phpmd": "@stable",
+                "roave/security-advisories": "dev-master",
                 "scrutinizer/ocular": "~1.1",
                 "squizlabs/php_codesniffer": "*",
-                "yiisoft/yii2": "*"
+                "yiisoft/yii2": "^2.0"
             },
-            "type": "yii2-extension",
+            "type": "library",
             "extra": {
                 "branch-alias": {
                     "dev-master": "1.0-dev"
@@ -55,27 +60,24 @@
                 {
                     "name": "2amigOS! Consulting Group",
                     "email": "hola@2amigos.us",
-                    "homepage": "http://2amigos.us",
+                    "homepage": "https://2amigos.us",
                     "role": "Developer"
                 }
             ],
             "description": "QrCode Generator",
-            "homepage": "http://www.2amigos.us/open-source/details/qrcode-library",
+            "homepage": "https://2amigos.us/open-source/details/qrcode-library",
             "keywords": [
                 "2amigos",
                 "component",
                 "extension",
                 "qr",
-                "qrcode",
-                "yii",
-                "yii 2",
-                "yii2"
+                "qrcode"
             ],
             "support": {
                 "issues": "https://github.com/2amigos/qrcode-library/issues",
                 "source": "https://github.com/2amigos/qrcode-library"
             },
-            "time": "2017-08-25T15:23:58+00:00"
+            "time": "2020-01-31T20:12:22+00:00"
         },
         {
             "name": "bacon/bacon-qr-code",
@@ -132,7 +134,7 @@
             "version": "v3.4.1",
             "source": {
                 "type": "git",
-                "url": "git@github.com:twbs/bootstrap.git",
+                "url": "https://github.com/twbs/bootstrap.git",
                 "reference": "68b0d231a13201eb14acd3dc84e51543d16e5f7e"
             },
             "dist": {

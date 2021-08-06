@@ -126,26 +126,17 @@ class PlanController extends Controller
     public function actionCertificate($id)
     {
         if ($this->findModel($id)['status_id'] == 3) {
-            return $this->render('certificate', [
-                'id' => $id,
-                'model' => $this->findModel($id),
-            ]);
+            $pdf = $id . '.pdf';
+            if (!file_exists(Yii::getAlias('@webroot/certificates/') . $pdf)) {
+                $this->generateCertificate($id);
+            }
+            return $this->render('certificate', ['pdf' => $pdf]);
         } else {
             throw new ForbiddenHttpException("ЭУИ ещё не проверено.");
         }
     }
 
-    protected function generateCertificate(
-        $lang,
-        $type,
-        $number,
-        $name,
-        $teacherName,
-        $department,
-        $discipline,
-        $speciality,
-        array $values
-    )
+    protected function generateCertificate($id)
     {
         $months = [
             '01' => [
@@ -194,28 +185,38 @@ class PlanController extends Controller
                 'kz' => "қыркүйек",
             ],
         ];
-        $certificatePath = Yii::getAlias('@webroot/certificates/') . $number . '_' . $lang;
 
-        $qrCode = (new QrCode($number . '_' . $lang))
+        $model = $this->findModel($id);
+        $id = $model->id;
+        if ($model->type->name == 'МООК') {
+            $type = 'МООК';
+        } else {
+            $type = 'ВУ';
+            $lessonType = substr($model->type->name, 6);
+        }
+        $certificatePath = Yii::getAlias('@webroot/certificates/') . $id;
+
+        $qrCode = (new QrCode($id))
         ->setSize(150)
         ->setMargin(0)
         ->setForegroundColor(0, 0, 0);
-        $templateProcessor = new TemplateProcessor('templates/' . $type  . '_' . $lang . '.docx');
+        $templateProcessor = new TemplateProcessor('templates/' . $type  . '_' . $model->languages->short_name . '.docx');
         $templateProcessor->setValues([
-            'number' =>  $number,
-            'name' =>  $name,
-            'teacherName' =>  $teacherName,
-            'teacherName2' =>  isset($values['teacherName2']) ? ($values['teacherName2']) : (''),
-            'teacherName3' =>  isset($values['teacherName3']) ? ($values['teacherName3']) : (''),
-            'department' =>  $department,
-            'discipline' =>  $discipline,
-            'speciality' =>  $speciality,
-            'speciality2' =>  isset($values['speciality2']) ? ($values['speciality2']) : (''),
-            'speciality3' =>  isset($values['speciality3']) ? ($values['speciality3']) : (''),
-            'day' =>  isset($values['day']) ? ($values['day']) : (date('d')),
-            'month' => isset($values['month']) ? ($months[$values['month']][$lang]) : ($months[date('m')][$lang]),
-            'year' =>  isset($values['year']) ? ($values['year']) : (date('y')),
-            'amount' =>  isset($values['amount']) ? ($values['amount']) : (''),
+            'number' =>  $id,
+            'name' =>  $model->name,
+            'lessonType' =>  isset($lessonType) ? ($lessonType) : (''),
+            // 'teacherName' =>  $teacherName,
+            // 'teacherName2' =>  isset($values['teacherName2']) ? ($values['teacherName2']) : (''),
+            // 'teacherName3' =>  isset($values['teacherName3']) ? ($values['teacherName3']) : (''),
+            'department' =>  $model->cathedra->name,
+            'discipline' =>  $model->discipline,
+            // 'speciality' =>  $speciality,
+            // 'speciality2' =>  isset($values['speciality2']) ? ($values['speciality2']) : (''),
+            // 'speciality3' =>  isset($values['speciality3']) ? ($values['speciality3']) : (''),
+            // 'day' =>  isset($values['day']) ? ($values['day']) : (date('d')),
+            // 'month' => isset($values['month']) ? ($months[$values['month']][$lang]) : ($months[date('m')][$lang]),
+            // 'year' =>  isset($values['year']) ? ($values['year']) : (date('y')),
+            // 'amount' =>  isset($values['amount']) ? ($values['amount']) : (''),
         ]);
         $templateProcessor->setImageValue('qrCode', $qrCode->writeDataUri());
         $templateProcessor->saveAs($certificatePath . '.docx');

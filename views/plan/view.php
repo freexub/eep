@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Plan */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'План ЭУИ', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Планы ЭУИ', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -17,6 +17,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::encode($model->status->id) == 3 ? (
+                Html::a('Загрузить сертификат', ['certificate', 'id' => $model->id], ['class' => 'btn btn-info'])
+            ) : ('') ?>
         <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -51,3 +54,10 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 </div>
+
+<pre><?= var_dump($model) ?></pre>
+<pre><?= var_dump($model->status) ?></pre>
+<pre><?= var_dump($model->languages) ?></pre>
+<?= $model->languages->short_name ?>
+<?= $model->status->name ?>
+<?= $model->type->name ?>
