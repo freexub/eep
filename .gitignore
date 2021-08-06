@@ -34,3 +34,6 @@ tests/_support/_generated
 
 # config folder
 config/db.php
+
+# certificates
+/web/certificates

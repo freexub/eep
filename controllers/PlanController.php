@@ -10,6 +10,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
+use Da\QrCode\QrCode;
+use PhpOffice\PhpWord\TemplateProcessor;
 
 /**
  * PlanController implements the CRUD actions for Plan model.
@@ -145,7 +147,80 @@ class PlanController extends Controller
         array $values
     )
     {
+        $months = [
+            '01' => [
+                'ru' => "января",
+                'en' => "january",
+                'kz' => "қаңтар",
+            ],
+            '02' => [
+                'ru' => "ферваря",
+                'en' => "february",
+                'kz' => "ақпан",
+            ],
+            '03' => [
+                'ru' => "марта",
+                'en' => "march",
+                'kz' => "наурыз",
+            ],
+            '04' => [
+                'ru' => "апреля",
+                'en' => "april",
+                'kz' => "сәуір",
+            ],
+            '05' => [
+                'ru' => "мая",
+                'en' => "may",
+                'kz' => "мамыр",
+            ],
+            '06' => [
+                'ru' => "июня",
+                'en' => "june",
+                'kz' => "маусым",
+            ],
+            '07' => [
+                'ru' => "июля",
+                'en' => "july",
+                'kz' => "шілде",
+            ],
+            '08' => [
+                'ru' => "августа",
+                'en' => "august",
+                'kz' => "тамыз",
+            ],
+            '09' => [
+                'ru' => "сентября",
+                'en' => "september",
+                'kz' => "қыркүйек",
+            ],
+        ];
+        $certificatePath = Yii::getAlias('@webroot/certificates/') . $number . '_' . $lang;
 
+        $qrCode = (new QrCode($number . '_' . $lang))
+        ->setSize(150)
+        ->setMargin(0)
+        ->setForegroundColor(0, 0, 0);
+        $templateProcessor = new TemplateProcessor('templates/' . $type  . '_' . $lang . '.docx');
+        $templateProcessor->setValues([
+            'number' =>  $number,
+            'name' =>  $name,
+            'teacherName' =>  $teacherName,
+            'teacherName2' =>  isset($values['teacherName2']) ? ($values['teacherName2']) : (''),
+            'teacherName3' =>  isset($values['teacherName3']) ? ($values['teacherName3']) : (''),
+            'department' =>  $department,
+            'discipline' =>  $discipline,
+            'speciality' =>  $speciality,
+            'speciality2' =>  isset($values['speciality2']) ? ($values['speciality2']) : (''),
+            'speciality3' =>  isset($values['speciality3']) ? ($values['speciality3']) : (''),
+            'day' =>  isset($values['day']) ? ($values['day']) : (date('d')),
+            'month' => isset($values['month']) ? ($months[$values['month']][$lang]) : ($months[date('m')][$lang]),
+            'year' =>  isset($values['year']) ? ($values['year']) : (date('y')),
+            'amount' =>  isset($values['amount']) ? ($values['amount']) : (''),
+        ]);
+        $templateProcessor->setImageValue('qrCode', $qrCode->writeDataUri());
+        $templateProcessor->saveAs($certificatePath . '.docx');
+        exec('"' . Yii::$app->params['libreOfficePath'] . '"' . ' --convert-to pdf "' . $certificatePath . '.docx" --outdir "' . Yii::getAlias('@webroot/certificates/') . '"');
+        unlink($certificatePath . '.docx');
     }
 
     /**
